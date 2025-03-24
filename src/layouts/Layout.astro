@@ -13,6 +13,15 @@ const { frontmatter } = Astro.props;
     <title>Astro</title>
   </head>
   <body class="p-5">
+    {
+      Astro.url.pathname !== "/" && (
+        <p class="py-4">
+          <a class="underline" href={"/"}>
+            ◀︎ Back to the homepage
+          </a>
+        </p>
+      )
+    }
     {frontmatter?.title && <h1>{frontmatter.title}</h1>}
     <slot />
   </body>
