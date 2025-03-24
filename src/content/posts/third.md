@@ -1,6 +1,6 @@
 ---
-layout: "@layouts/Layout.astro"
 title: "Third Blog Post"
+date: 2025-01-03
 ---
 
 

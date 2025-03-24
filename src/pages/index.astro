@@ -1,8 +1,14 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
-
 const blogPosts = await getCollection("blogPosts");
+
+// Get the last 5 blog posts
+let sortedPosts = [...blogPosts]
+  .sort(
+    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+  )
+  .slice(0, 5);
 ---
 
 <Layout>
@@ -11,11 +17,12 @@ const blogPosts = await getCollection("blogPosts");
   <p class="my-4">Blog Posts:</p>
   <ul class="list-inside list-disc">
     {
-      blogPosts.map((post) => (
+      sortedPosts.map((post) => (
         <li>
           <a class="underline" href={`/blog/${post.id}`}>
             {post.data.title}
           </a>
+          <span>({post.data.date.toLocaleDateString()})</span>
         </li>
       ))
     }
