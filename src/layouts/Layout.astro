@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, title } = Astro.props;
+const defaultImage = "https://mywebsite.com/image.png";
+const ogImage = frontmatter?.image || defaultImage;
 ---
 
 <html lang="en">
@@ -10,7 +12,23 @@ const { frontmatter } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <meta
+      name="description"
+      content={frontmatter?.description
+        ? frontmatter.description + " | mycool.blog"
+        : "My cool blog"}
+    />
+    <meta property="og:image" content={ogImage} />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="My Cool Blog"
+      href="/rss.xml"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <title>{title} | mycool.blog</title>
   </head>
   <body class="p-5">
     {

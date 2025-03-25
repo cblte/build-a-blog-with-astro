@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 
 // 1. Generate a new path for every collection entry
@@ -16,6 +17,6 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout frontmatter={post.data}>
+<Layout frontmatter={post.data} title={post.data.title}>
   <Content />
 </Layout>
